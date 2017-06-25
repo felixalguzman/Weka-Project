@@ -22,12 +22,18 @@ import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JLabel;
 
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
 	private File defaultlocation = new File(".");
 	private JButton btnEditarDataset = new JButton("Editar Dataset");
+	private JTextField ruta;
+	private JTextPane resumen;
 
 	/**
 	 * Launch the application.
@@ -76,6 +82,8 @@ public class MainWindow extends JFrame {
 					//textField.setText(fc.getSelectedFile().getAbsolutePath());
 					try {
 						Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
+						ruta.setText(fc.getSelectedFile().getAbsolutePath());
+						resumen.setText(p.Resumen());
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -88,5 +96,28 @@ public class MainWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 22, 709, 292);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 55, 689, 226);
+		panel.add(scrollPane);
+		
+		resumen = new JTextPane();
+		scrollPane.setViewportView(resumen);
+		
+		ruta = new JTextField();
+		ruta.setEditable(false);
+		ruta.setBounds(66, 24, 633, 20);
+		panel.add(ruta);
+		ruta.setColumns(10);
+		
+		JLabel lblRuta = new JLabel("Ruta: ");
+		lblRuta.setBounds(10, 27, 46, 14);
+		panel.add(lblRuta);
 	}
 }

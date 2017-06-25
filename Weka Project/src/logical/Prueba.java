@@ -6,19 +6,21 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 public class Prueba {
+	
+	private Instances dataset ;
+	private DataSource source;
 
 	public Prueba(String absolutePath) throws Exception {
-		Leer(absolutePath);
+		//Leer();
+		source = new DataSource(absolutePath);
+		dataset = source.getDataSet();
 	}
 
-	public void Leer(String lugar) throws Exception
+	
+	
+	public String Resumen()
 	{
-		
-		DataSource source = new DataSource(lugar);
-		Instances dataset = source.getDataSet();
-		
-		dataset.setClassIndex(dataset.numAttributes() - 1);
-		System.out.println(dataset.toSummaryString());
+		return dataset.toSummaryString();
 	}
 
 }
