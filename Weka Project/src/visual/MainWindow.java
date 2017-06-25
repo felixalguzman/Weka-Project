@@ -107,6 +107,20 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mnArchivo.add(mntmAbrirArchivo);
+		
+		JMenu mnLista = new JMenu("Lista");
+		menuBar.add(mnLista);
+		
+		JMenuItem mntmListaDeInstancias = new JMenuItem("Lista de Instancias");
+		mntmListaDeInstancias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListaInstancias li = new ListaInstancias(ruta.getText());
+				li.setModal(true);
+				li.setVisible(true);
+			}
+		});
+		mnLista.add(mntmListaDeInstancias);
 		mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);

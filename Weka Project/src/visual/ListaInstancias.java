@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+
+import logical.Prueba;
+
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,24 +26,18 @@ public class ListaInstancias extends JDialog {
 	private JTable tablaInstancias;
 	private DefaultTableModel modeloTabla;
 	private Object[] fila;
+	private int cantinstancias=0;
+	private String[] instancias;
+	private String[] nombresColumnas;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListaInstancias dialog = new ListaInstancias();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	/**
 	 * Create the dialog.
 	 */
-	public ListaInstancias() {
+	public ListaInstancias(String ruta) {
 		setTitle("Lista de Instancias");
 		setBounds(100, 100, 1036, 651);
 		getContentPane().setLayout(new BorderLayout());
@@ -105,15 +102,51 @@ public class ListaInstancias extends JDialog {
 		tablaInstancias = new JTable();
 		scrollPane.setViewportView(tablaInstancias);
 		modeloTabla = new DefaultTableModel();
-		String[] nombresColumnas ={"Column_1","Column_2","Column_3","Column_4"};
+		
 		modeloTabla.setColumnIdentifiers(nombresColumnas);
-		cargarInstancias();
+		
+		if(!ruta.equalsIgnoreCase(""))
+		{
+			Prueba p = null;
+			try {
+				p = new Prueba(ruta);
+				cantinstancias = p.CantidadInstancias();
+				instancias = new String[cantinstancias];
+				instancias = p.Instancias();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			nombresColumnas = new String[p.CantidadAtributos()];
+			nombresColumnas = p.Atributos();
+			modeloTabla.setColumnIdentifiers(nombresColumnas);
+		}
+		if(cantinstancias!=0)
+		{
+			cargarInstancias();
+			System.out.println("instancia en 0 " + instancias[0]);
+			System.out.println("Cant Atributos " + nombresColumnas.length);
+		}
+		
 		contentPanel.setLayout(gl_contentPanel);
 	}
 
 	public void cargarInstancias() {
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
+		int cont =0;
+		
+		for(int i =0 ;i<nombresColumnas.length;i++)
+		{
+			for(int j=0; j < cantinstancias;j++)
+			{
+				fila[i] = instancias[j];
+			}
+			
+			
+			modeloTabla.addRow(fila);
+		}
 		//Realizar for que recorra cada una de las filas a cargar
 		tablaInstancias.setModel(modeloTabla);
 		tablaInstancias.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);

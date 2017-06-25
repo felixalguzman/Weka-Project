@@ -11,7 +11,7 @@ public class Prueba {
 	private DataSource source;
 
 	public Prueba(String absolutePath) throws Exception {
-		//Leer();
+		
 		source = new DataSource(absolutePath);
 		dataset = source.getDataSet();
 	}
@@ -22,5 +22,49 @@ public class Prueba {
 	{
 		return dataset.toSummaryString();
 	}
+	
+	public int CantidadInstancias()
+	{
+		return dataset.numInstances();
+	}
+	
+	public int CantidadAtributos()
+	{
+		return dataset.numAttributes();
+	}
+	
+	public String[] Atributos()
+	{
+		String[] nombres = new String[dataset.numAttributes()];
+		
+		for(int i=0; i < dataset.numAttributes();i++)
+		{
+			nombres[i] = dataset.attribute(i).toString();
+		}
+		return nombres;
+	}
+	
+	public String[] Instancias()
+	{
+		String[] inst = new String[dataset.numInstances()];
+		String[] aux = new String[dataset.numAttributes()*dataset.numInstances()];
+		
+		for(int i =0; i < dataset.numInstances();i++)
+		{
+			inst[i] = dataset.instance(i).toString();
+			
+			
+		}
+		
+		for(int i=0; i < dataset.numInstances();i++)
+		{
+			aux = inst[i].split("\\,");
+		}
+		
+		inst = aux; 
+		return inst;
+	}
+	
+	
 
 }
