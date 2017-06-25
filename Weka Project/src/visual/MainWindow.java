@@ -82,7 +82,7 @@ public class MainWindow extends JFrame {
 					textField.setText(fc.getSelectedFile().getAbsolutePath());
 					try {
 						Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
-					} catch (IOException e1) {
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
