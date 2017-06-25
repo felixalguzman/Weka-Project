@@ -107,12 +107,6 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mnArchivo.add(mntmAbrirArchivo);
-		
-		JMenu mnLista = new JMenu("Lista");
-		menuBar.add(mnLista);
-		
-		JMenuItem mntmListaDeInstancias = new JMenuItem("Lista de Instancias");
-		mnLista.add(mntmListaDeInstancias);
 		mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
