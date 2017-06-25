@@ -140,29 +140,20 @@ public class MainWindow extends JFrame {
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
 		
-		lblJavaIcon = new JLabel("",SwingConstants.CENTER);
-		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
-		lblJavaIcon.setBounds(-250, -87, 1902, 955);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int centerX = screenSize.width/2;
-		int centerY = screenSize.height/2;
-		Point p = new Point();
-		p.setLocation(centerX, centerY);
-		
-		lblJavaIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		lblJavaIcon.setVerticalAlignment(SwingConstants.CENTER);
-		//lblJavaIcon.setLocation(p);
-	//	lblJavaIcon.setLocation((this.getWidth()-lblJavaIcon.getWidth())/2,50);
 
+		JLabel lblJavaIcon = new JLabel("");
+
+		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
+		lblJavaIcon.setBounds(0, 0, 1902, 955);
+		lblJavaIcon.setHorizontalAlignment(JLabel.CENTER);
+		lblJavaIcon.setVerticalAlignment(JLabel.CENTER);
 		mainPanel.add(lblJavaIcon);
-		
-		
 		
 		JLabel lblWekaIcon = new JLabel("");
 		lblWekaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/weka-icon-background.png")));
 		lblWekaIcon.setVerticalAlignment(SwingConstants.CENTER);
 		lblWekaIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWekaIcon.setBounds(-250, -87, 1902, 955);
+		lblWekaIcon.setBounds(0, 0, 1902, 955);
 		mainPanel.add(lblWekaIcon);
 		
 	}
