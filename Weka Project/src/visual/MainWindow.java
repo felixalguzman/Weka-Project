@@ -47,9 +47,9 @@ public class MainWindow extends JFrame {
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();
-					Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-					frame.setLocation(dim.width/2 - frame.getSize().width/2, dim.height/2 - frame.getSize().height/2);
+					
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,8 +61,10 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow() {
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/icons/weka-icon.png")));
 		setTitle("Weka-Java Implementation");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 880, 592);
 		
@@ -85,6 +87,7 @@ public class MainWindow extends JFrame {
 				fc.setFileFilter(filtro);
 				
 				if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION){
+					informacionArchivoPanel.setVisible(true);
 					//textField.setText(fc.getSelectedFile().getAbsolutePath());
 					try {
 						Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
@@ -95,7 +98,7 @@ public class MainWindow extends JFrame {
 						e1.printStackTrace();
 					}
 				}
-				informacionArchivoPanel.setVisible(true);
+				
 				
 			}
 		});
