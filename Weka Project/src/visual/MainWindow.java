@@ -151,8 +151,5 @@ public class MainWindow extends JFrame {
 		lblWekaIcon.setHorizontalAlignment(JLabel.CENTER);
 		lblWekaIcon.setVerticalAlignment(JLabel.CENTER);
 		
-		//nub
-		
-		
 	}
 }
