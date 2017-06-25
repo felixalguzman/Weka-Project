@@ -43,9 +43,6 @@ public class MainWindow extends JFrame {
 	private JTextField ruta;
 	private JTextPane resumen;
 	private JPanel informacionArchivoPanel;
-	private JLabel lblJavaIcon;
-	
-	
 
 	/**
 	 * Launch the application.
@@ -140,21 +137,21 @@ public class MainWindow extends JFrame {
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
 		
-
 		JLabel lblJavaIcon = new JLabel("");
-
 		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
 		lblJavaIcon.setBounds(0, 0, 1902, 955);
+		mainPanel.add(lblJavaIcon);
 		lblJavaIcon.setHorizontalAlignment(JLabel.CENTER);
 		lblJavaIcon.setVerticalAlignment(JLabel.CENTER);
-		mainPanel.add(lblJavaIcon);
 		
 		JLabel lblWekaIcon = new JLabel("");
 		lblWekaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/weka-icon-background.png")));
-		lblWekaIcon.setVerticalAlignment(SwingConstants.CENTER);
-		lblWekaIcon.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWekaIcon.setBounds(0, 0, 1902, 955);
 		mainPanel.add(lblWekaIcon);
+		lblWekaIcon.setHorizontalAlignment(JLabel.CENTER);
+		lblWekaIcon.setVerticalAlignment(JLabel.CENTER);
+		
+		
 		
 	}
 }
