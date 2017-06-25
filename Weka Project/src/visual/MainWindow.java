@@ -19,11 +19,13 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private File defaultlocation = new File(".");
 	private JButton btnEditarDataset = new JButton("Editar Dataset");
 
@@ -50,23 +52,15 @@ public class MainWindow extends JFrame {
 		setTitle("Weka ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 880, 592);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Opciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(15, 158, 828, 360);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JMenu mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
 		
-		
-		JButton btnAbrirDataset = new JButton("Abrir Dataset");
-		
-		
-		btnAbrirDataset.addActionListener(new ActionListener() {
+		JMenuItem mntmAbrirArchivo = new JMenuItem("Abrir archivo");
+		mntmAbrirArchivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				JFileChooser fc = new JFileChooser();
@@ -79,7 +73,7 @@ public class MainWindow extends JFrame {
 				
 				if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION)
 				{
-					textField.setText(fc.getSelectedFile().getAbsolutePath());
+					//textField.setText(fc.getSelectedFile().getAbsolutePath());
 					try {
 						Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
 					} catch (Exception e1) {
@@ -87,40 +81,12 @@ public class MainWindow extends JFrame {
 						e1.printStackTrace();
 					}
 				}
-				//System.out.println("Ubicacion: " + fc.getSelectedFile().getAbsolutePath());
-				
 			}
 		});
-		btnAbrirDataset.setBounds(15, 52, 160, 37);
-		panel.add(btnAbrirDataset);
-		
-		
-		
-		btnEditarDataset = new JButton("Editar Dataset");
-		btnEditarDataset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EditarDataset newEditDataset= new EditarDataset();
-				newEditDataset.show();
-				
-				
-			}
-		});
-		btnEditarDataset.setBounds(15, 134, 160, 37);
-		panel.add(btnEditarDataset);
-		
-		
-		
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(201, 54, 524, 32);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnMostrarGraficas = new JButton("Mostrar Graficos");
-		btnMostrarGraficas.setBounds(15, 211, 160, 37);
-		panel.add(btnMostrarGraficas);
+		mnArchivo.add(mntmAbrirArchivo);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 	}
-	
-	
 }

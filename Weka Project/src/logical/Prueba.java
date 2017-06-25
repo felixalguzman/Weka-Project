@@ -1,8 +1,6 @@
 package logical;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
