@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,11 +31,13 @@ import java.awt.Toolkit;
 
 public class MainWindow extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel mainPanel;
 	private File defaultlocation = new File(".");
 	private JButton btnEditarDataset = new JButton("Editar Dataset");
 	private JTextField ruta;
 	private JTextPane resumen;
+	private JPanel informacionArchivoPanel;
+	
 
 	/**
 	 * Launch the application.
@@ -44,6 +47,8 @@ public class MainWindow extends JFrame {
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();
+					Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2, dim.height/2 - frame.getSize().height/2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,8 +84,7 @@ public class MainWindow extends JFrame {
 				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Solo archivos con .arff", "arff");
 				fc.setFileFilter(filtro);
 				
-				if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION)
-				{
+				if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION){
 					//textField.setText(fc.getSelectedFile().getAbsolutePath());
 					try {
 						Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
@@ -91,23 +95,26 @@ public class MainWindow extends JFrame {
 						e1.printStackTrace();
 					}
 				}
+				informacionArchivoPanel.setVisible(true);
+				
 			}
 		});
 		mnArchivo.add(mntmAbrirArchivo);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		mainPanel = new JPanel();
+		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(mainPanel);
+		mainPanel.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 22, 709, 292);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		informacionArchivoPanel = new JPanel();
+		informacionArchivoPanel.setVisible(false);
+		informacionArchivoPanel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		informacionArchivoPanel.setBounds(10, 22, 709, 292);
+		mainPanel.add(informacionArchivoPanel);
+		informacionArchivoPanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 55, 689, 226);
-		panel.add(scrollPane);
+		informacionArchivoPanel.add(scrollPane);
 		
 		resumen = new JTextPane();
 		scrollPane.setViewportView(resumen);
@@ -115,11 +122,11 @@ public class MainWindow extends JFrame {
 		ruta = new JTextField();
 		ruta.setEditable(false);
 		ruta.setBounds(66, 24, 633, 20);
-		panel.add(ruta);
+		informacionArchivoPanel.add(ruta);
 		ruta.setColumns(10);
 		
 		JLabel lblRuta = new JLabel("Ruta: ");
 		lblRuta.setBounds(10, 27, 46, 14);
-		panel.add(lblRuta);
+		informacionArchivoPanel.add(lblRuta);
 	}
 }
