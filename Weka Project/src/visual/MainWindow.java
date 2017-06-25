@@ -26,6 +26,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 public class MainWindow extends JFrame {
 
@@ -55,7 +56,8 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow() {
-		setTitle("Weka ");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/icons/weka-icon.png")));
+		setTitle("Weka-Java Implementation");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 880, 592);
 		
