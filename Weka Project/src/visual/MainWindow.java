@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,6 +43,7 @@ public class MainWindow extends JFrame {
 	private JTextField ruta;
 	private JTextPane resumen;
 	private JPanel informacionArchivoPanel;
+	private JLabel lblJavaIcon;
 	
 	
 
@@ -88,7 +90,7 @@ public class MainWindow extends JFrame {
 				fc.setCurrentDirectory(defaultlocation);
 				fc.setDialogTitle("Elegir archivo");
 				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Solo archivos con .arff", "arff");
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Solo archivos con la extension .arff", "arff");
 				fc.setFileFilter(filtro);
 				
 				if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION){
@@ -125,6 +127,7 @@ public class MainWindow extends JFrame {
 		informacionArchivoPanel.add(scrollPane);
 		
 		resumen = new JTextPane();
+		resumen.setEditable(false);
 		scrollPane.setViewportView(resumen);
 		
 		ruta = new JTextField();
@@ -137,18 +140,29 @@ public class MainWindow extends JFrame {
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
 		
-		JLabel lblJavaIcon = new JLabel("");
+		lblJavaIcon = new JLabel("",SwingConstants.CENTER);
 		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
-		lblJavaIcon.setBounds(0, 0, 1902, 955);
-		lblJavaIcon.setHorizontalAlignment(JLabel.CENTER);
-		lblJavaIcon.setVerticalAlignment(JLabel.CENTER);
+		lblJavaIcon.setBounds(-250, -87, 1902, 955);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int centerX = screenSize.width/2;
+		int centerY = screenSize.height/2;
+		Point p = new Point();
+		p.setLocation(centerX, centerY);
+		
+		lblJavaIcon.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJavaIcon.setVerticalAlignment(SwingConstants.CENTER);
+		//lblJavaIcon.setLocation(p);
+	//	lblJavaIcon.setLocation((this.getWidth()-lblJavaIcon.getWidth())/2,50);
+
 		mainPanel.add(lblJavaIcon);
+		
+		
 		
 		JLabel lblWekaIcon = new JLabel("");
 		lblWekaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/weka-icon-background.png")));
 		lblWekaIcon.setVerticalAlignment(SwingConstants.CENTER);
 		lblWekaIcon.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWekaIcon.setBounds(0, 0, 1902, 955);
+		lblWekaIcon.setBounds(-250, -87, 1902, 955);
 		mainPanel.add(lblWekaIcon);
 		
 	}
