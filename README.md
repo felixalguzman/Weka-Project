@@ -4,7 +4,6 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Weka ###
 
-* Quick summary
 Una aplicación en un ambiente de su preferencia (ej. Java) de manera que se le suministre nueva información y la aplicación realice una tarea de minería.
 
 La creación de la App debe: 
