@@ -18,18 +18,15 @@ public class Prueba {
 
 	
 	
-	public String Resumen()
-	{
+	public String Resumen(){
 		return dataset.toSummaryString();
 	}
 	
-	public int CantidadInstancias()
-	{
+	public int CantidadInstancias(){
 		return dataset.numInstances();
 	}
 	
-	public int CantidadAtributos()
-	{
+	public int CantidadAtributos(){
 		return dataset.numAttributes();
 	}
 	
@@ -44,7 +41,7 @@ public class Prueba {
 		return nombres;
 	}
 	
-	public String[] Instancias()
+	/*public String[] Instancias()
 	{
 		String[] inst = new String[dataset.numInstances()];
 		String[] aux = new String[dataset.numAttributes()*dataset.numInstances()];
@@ -63,6 +60,15 @@ public class Prueba {
 		
 		inst = aux; 
 		return inst;
+	}*/
+	public void ObtenerInstancias(){
+		String[][] instanciasAux = new String[dataset.numInstances()][dataset.numInstances()];
+		for (int i = 0; i < dataset.numInstances(); i++) {
+			for (int j = 0; j < dataset.numAttributes(); j++) {
+				instanciasAux[i][j] = dataset.instance(i).stringValue(j);
+				System.out.println("Instancia "+i+": Atributo"+j+" "+instanciasAux[i][j]);
+			}
+		}
 	}
 	
 	
