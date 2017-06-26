@@ -35,6 +35,14 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.trees.J48;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+import weka.gui.beans.Classifier;
+
 public class MainWindow extends JFrame {
 
 	private JPanel mainPanel;
@@ -43,6 +51,7 @@ public class MainWindow extends JFrame {
 	private JTextField ruta;
 	private JTextPane resumen;
 	private JPanel informacionArchivoPanel;
+	private Instances data;
 
 	/**
 	 * Launch the application.
@@ -115,7 +124,7 @@ public class MainWindow extends JFrame {
 		informacionArchivoPanel = new JPanel();
 		informacionArchivoPanel.setVisible(false);
 		informacionArchivoPanel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		informacionArchivoPanel.setBounds(10, 22, 709, 292);
+		informacionArchivoPanel.setBounds(10, 22, 709, 335);
 		mainPanel.add(informacionArchivoPanel);
 		informacionArchivoPanel.setLayout(null);
 		
@@ -136,6 +145,31 @@ public class MainWindow extends JFrame {
 		JLabel lblRuta = new JLabel("Ruta: ");
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
+		
+		JButton btnJ = new JButton("J48");
+		btnJ.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Prueba p = new Prueba(ruta.getText());
+					data = p.getDataset();
+					data.setClassIndex(data.numAttributes()-1);
+					
+					
+					
+					
+					NaiveBayes nb = new NaiveBayes();
+					nb.buildClassifier(data);
+					
+					System.out.println(nb.displayModelInOldFormatTipText());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnJ.setBounds(10, 301, 89, 23);
+		informacionArchivoPanel.add(btnJ);
 		
 		JLabel lblJavaIcon = new JLabel("");
 		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
