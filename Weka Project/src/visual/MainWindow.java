@@ -186,13 +186,13 @@ public class MainWindow extends JFrame {
 						double pred = nb.classifyInstance(newInt);
 
 						String predString = data.classAttribute().value((int)pred);
-						System.out.println(actual+", "+predString);
+						//System.out.println(actual+", "+predString);
 						txtFldResultados.setText(txtFldResultados.getText() + (actual +"\t" + predString) + "\n");
 					}
 
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 			}
@@ -220,7 +220,7 @@ public class MainWindow extends JFrame {
 	public void llenarInformacion()
 	{
 		JFileChooser fc = new JFileChooser();
-		//fc.showOpenDialog(null);
+		
 		fc.setCurrentDirectory(defaultlocation);
 		fc.setDialogTitle("Elegir archivo");
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -229,13 +229,13 @@ public class MainWindow extends JFrame {
 
 		if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION){
 			informacionArchivoPanel.setVisible(true);
-			//textField.setText(fc.getSelectedFile().getAbsolutePath());
+			
 			try {
 				Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
 				ruta.setText(fc.getSelectedFile().getAbsolutePath());
 				resumen.setText(p.Resumen());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		}
@@ -249,7 +249,7 @@ public class MainWindow extends JFrame {
 			ruta.setText(lugar);
 			resumen.setText(p.Resumen());
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 	}
