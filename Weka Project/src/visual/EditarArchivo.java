@@ -72,9 +72,7 @@ public class EditarArchivo implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == saveButton) {
 			saveFile(lugar);
-			
-			
-			
+			MainWindow.actualizarInformacion(lugar);
 		} else {
 			loadFile(lugar);
 			

@@ -16,31 +16,21 @@ public class Prueba {
 		dataset = source.getDataSet();
 	}
 
-	
-	
 	public Instances getDataset() {
 		return dataset;
 	}
-
-
 
 	public void setDataset(Instances dataset) {
 		this.dataset = dataset;
 	}
 
-
-
 	public DataSource getSource() {
 		return source;
 	}
 
-
-
 	public void setSource(DataSource source) {
 		this.source = source;
 	}
-
-
 
 	public String Resumen(){
 		return dataset.toSummaryString();
@@ -64,37 +54,4 @@ public class Prueba {
 		}
 		return nombres;
 	}
-	
-	/*public String[] Instancias()
-	{
-		String[] inst = new String[dataset.numInstances()];
-		String[] aux = new String[dataset.numAttributes()*dataset.numInstances()];
-		
-		for(int i =0; i < dataset.numInstances();i++)
-		{
-			inst[i] = dataset.instance(i).toString();
-			
-			
-		}
-		
-		for(int i=0; i < dataset.numInstances();i++)
-		{
-			aux = inst[i].split("\\,");
-		}
-		
-		inst = aux; 
-		return inst;
-	}*/
-	public void ObtenerInstancias(){
-		String[][] instanciasAux = new String[dataset.numInstances()][dataset.numInstances()];
-		for (int i = 0; i < dataset.numInstances(); i++) {
-			for (int j = 0; j < dataset.numAttributes(); j++) {
-				instanciasAux[i][j] = dataset.instance(i).stringValue(j);
-				System.out.println("Instancia "+i+": Atributo"+j+" "+instanciasAux[i][j]);
-			}
-		}
-	}
-	
-	
-
 }

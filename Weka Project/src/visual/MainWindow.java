@@ -95,11 +95,7 @@ public class MainWindow extends JFrame {
 		JMenuItem mntmAbrirArchivo = new JMenuItem("Abrir archivo");
 		mntmAbrirArchivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
 				llenarInformacion();
-
-
 
 			}
 		});
@@ -111,8 +107,6 @@ public class MainWindow extends JFrame {
 
 				EditarArchivo ea = new EditarArchivo(ruta.getText());
 				actualizarInformacion(ruta.getText());
-
-
 			}
 		});
 		mnArchivo.add(mntmEditarArchivo);
@@ -192,7 +186,6 @@ public class MainWindow extends JFrame {
 
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -220,7 +213,6 @@ public class MainWindow extends JFrame {
 	public void llenarInformacion()
 	{
 		JFileChooser fc = new JFileChooser();
-		//fc.showOpenDialog(null);
 		fc.setCurrentDirectory(defaultlocation);
 		fc.setDialogTitle("Elegir archivo");
 		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -229,27 +221,23 @@ public class MainWindow extends JFrame {
 
 		if(fc.showOpenDialog(btnEditarDataset) == JFileChooser.APPROVE_OPTION){
 			informacionArchivoPanel.setVisible(true);
-			//textField.setText(fc.getSelectedFile().getAbsolutePath());
 			try {
 				Prueba p = new Prueba(fc.getSelectedFile().getAbsolutePath());
 				ruta.setText(fc.getSelectedFile().getAbsolutePath());
 				resumen.setText(p.Resumen());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 	}
 
-	public static void actualizarInformacion(String lugar)
-	{
+	public static void actualizarInformacion(String lugar){
 
 		try {
 			Prueba p = new Prueba(lugar);
 			ruta.setText(lugar);
 			resumen.setText(p.Resumen());
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
