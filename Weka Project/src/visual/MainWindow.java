@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -55,7 +56,8 @@ public class MainWindow extends JFrame {
 	private JPanel informacionArchivoPanel;
 	private JPanel resultadosPanel;
 	private Instances data;
-	private JButton btnJ48;
+	private JButton btnNaive;
+	private JTextPane txtFldResultados;
 
 
 	/**
@@ -123,6 +125,21 @@ public class MainWindow extends JFrame {
 		mnArchivo.add(mntmAbrirArchivo);
 		
 		JMenuItem mntmEditarArchivo = new JMenuItem("Editar Archivo");
+		mntmEditarArchivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(!ruta.getText().equalsIgnoreCase(""))
+				{
+					EditarArchivo ea = new EditarArchivo();
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado");
+				}
+				
+				
+			}
+		});
 		mnArchivo.add(mntmEditarArchivo);
 		mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -144,18 +161,18 @@ public class MainWindow extends JFrame {
 			gl_resultadosPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_resultadosPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrllPResultados, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(scrllPResultados, GroupLayout.PREFERRED_SIZE, 946, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(156, Short.MAX_VALUE))
 		);
 		gl_resultadosPanel.setVerticalGroup(
-			gl_resultadosPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_resultadosPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrllPResultados, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+			gl_resultadosPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_resultadosPanel.createSequentialGroup()
+					.addContainerGap(58, Short.MAX_VALUE)
+					.addComponent(scrllPResultados, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		
-		JTextPane txtFldResultados = new JTextPane();
+		txtFldResultados = new JTextPane();
 		scrllPResultados.setViewportView(txtFldResultados);
 		resultadosPanel.setLayout(gl_resultadosPanel);
 		informacionArchivoPanel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -181,21 +198,37 @@ public class MainWindow extends JFrame {
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
 		
-		btnJ48 = new JButton("J48");
-		btnJ48.addActionListener(new ActionListener() {
+		btnNaive = new JButton("Naive Bayes");
+		btnNaive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				resultadosPanel.setVisible(true);
 				
 				try {
 					Prueba p = new Prueba(ruta.getText());
 					data = p.getDataset();
+					
+					
 					data.setClassIndex(data.numAttributes()-1);
-					
-					
-					
-					
 					NaiveBayes nb = new NaiveBayes();
 					nb.buildClassifier(data);
+					txtFldResultados.setText("Clase Actual\tNB Prediccion"+"\n");
+					for(int i=0;i<data.numInstances();i++)
+					{
+						double actualClass = data.instance(i).classValue();
+						String actual = data.classAttribute().value((int)actualClass);
+						
+						Instance newInt = data.instance(i);
+						
+						double pred = nb.classifyInstance(newInt);
+						
+						String predString = data.classAttribute().value((int)pred);
+						System.out.println(actual+", "+predString);
+						
+						txtFldResultados.setText(txtFldResultados.getText() + (actual +"\t" + predString) + "\n");
+					}
+					
+					
+					
 					
 					System.out.println(nb.displayModelInOldFormatTipText());
 				} catch (Exception e1) {
@@ -204,8 +237,8 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		btnJ48.setBounds(10, 301, 89, 23);
-		informacionArchivoPanel.add(btnJ48);
+		btnNaive.setBounds(10, 301, 131, 23);
+		informacionArchivoPanel.add(btnNaive);
 		
 		JLabel lblJavaIcon = new JLabel("");
 		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
