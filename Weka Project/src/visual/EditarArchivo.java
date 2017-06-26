@@ -26,7 +26,7 @@ import java.awt.Toolkit;
  * JFileChooser for the user to select a file to read from or write to.
  * It also demonstrates reading and writing text files.
  */
-public class TextEditor implements ActionListener {
+public class EditarArchivo implements ActionListener {
 	// Size of editing text area.
 	private static final int NUM_ROWS = 25;
 	private static final int NUM_COLS = 50;
@@ -38,10 +38,10 @@ public class TextEditor implements ActionListener {
 	private JTextArea text;
 
 	// Creates the GUI
-	public TextEditor() {
+	public EditarArchivo() {
 		JFrame frmEditarArchivo = new JFrame();
 		frmEditarArchivo.setTitle("Editar Archivo");
-		frmEditarArchivo.setIconImage(Toolkit.getDefaultToolkit().getImage(TextEditor.class.getResource("/icons/weka-icon.png")));
+		frmEditarArchivo.setIconImage(Toolkit.getDefaultToolkit().getImage(EditarArchivo.class.getResource("/icons/weka-icon.png")));
 		JPanel buttonPanel = new JPanel();
 		saveButton = new JButton("Guardar Archivo");
 		loadButton = new JButton("Cargar Archivo");
@@ -142,6 +142,6 @@ public class TextEditor implements ActionListener {
 
 	// Main program for the application
 	public static void main(String[] args) {
-		new TextEditor();
+		new EditarArchivo();
 	}
 }

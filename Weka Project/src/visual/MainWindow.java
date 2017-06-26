@@ -55,6 +55,7 @@ public class MainWindow extends JFrame {
 	private JPanel informacionArchivoPanel;
 	private JPanel resultadosPanel;
 	private Instances data;
+	private JButton btnJ48;
 
 
 	/**
@@ -120,6 +121,9 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mnArchivo.add(mntmAbrirArchivo);
+		
+		JMenuItem mntmEditarArchivo = new JMenuItem("Editar Archivo");
+		mnArchivo.add(mntmEditarArchivo);
 		mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(mainPanel);
@@ -130,7 +134,7 @@ public class MainWindow extends JFrame {
 		
 		resultadosPanel = new JPanel();
 		resultadosPanel.setBorder(new TitledBorder(null, "Resultados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		resultadosPanel.setBounds(10, 351, 1124, 554);
+		resultadosPanel.setBounds(10, 385, 1124, 554);
 		mainPanel.add(resultadosPanel);
 		resultadosPanel.setVisible(false);
 		
@@ -177,9 +181,10 @@ public class MainWindow extends JFrame {
 		lblRuta.setBounds(10, 27, 46, 14);
 		informacionArchivoPanel.add(lblRuta);
 		
-		JButton btnJ = new JButton("J48");
-		btnJ.addActionListener(new ActionListener() {
+		btnJ48 = new JButton("J48");
+		btnJ48.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				resultadosPanel.setVisible(true);
 				
 				try {
 					Prueba p = new Prueba(ruta.getText());
@@ -199,8 +204,8 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		btnJ.setBounds(10, 301, 89, 23);
-		informacionArchivoPanel.add(btnJ);
+		btnJ48.setBounds(10, 301, 89, 23);
+		informacionArchivoPanel.add(btnJ48);
 		
 		JLabel lblJavaIcon = new JLabel("");
 		lblJavaIcon.setIcon(new ImageIcon(MainWindow.class.getResource("/icons/java icon.png")));
