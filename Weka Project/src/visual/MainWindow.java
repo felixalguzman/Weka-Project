@@ -34,6 +34,8 @@ import javax.swing.JLabel;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.SMO;
@@ -51,7 +53,9 @@ public class MainWindow extends JFrame {
 	private JTextField ruta;
 	private JTextPane resumen;
 	private JPanel informacionArchivoPanel;
+	private JPanel resultadosPanel;
 	private Instances data;
+
 
 	/**
 	 * Launch the application.
@@ -123,6 +127,33 @@ public class MainWindow extends JFrame {
 		
 		informacionArchivoPanel = new JPanel();
 		informacionArchivoPanel.setVisible(false);
+		
+		resultadosPanel = new JPanel();
+		resultadosPanel.setBorder(new TitledBorder(null, "Resultados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		resultadosPanel.setBounds(10, 351, 1124, 554);
+		mainPanel.add(resultadosPanel);
+		resultadosPanel.setVisible(false);
+		
+		JScrollPane scrllPResultados = new JScrollPane();
+		GroupLayout gl_resultadosPanel = new GroupLayout(resultadosPanel);
+		gl_resultadosPanel.setHorizontalGroup(
+			gl_resultadosPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_resultadosPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrllPResultados, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_resultadosPanel.setVerticalGroup(
+			gl_resultadosPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_resultadosPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrllPResultados, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		JTextPane txtFldResultados = new JTextPane();
+		scrllPResultados.setViewportView(txtFldResultados);
+		resultadosPanel.setLayout(gl_resultadosPanel);
 		informacionArchivoPanel.setBorder(new TitledBorder(null, "Informacion del archivo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		informacionArchivoPanel.setBounds(10, 22, 709, 335);
 		mainPanel.add(informacionArchivoPanel);
