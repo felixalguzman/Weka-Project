@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import logical.Prueba;
+
 import java.awt.Toolkit;
 
 /*
@@ -30,23 +33,23 @@ public class EditarArchivo implements ActionListener {
 	// Size of editing text area.
 	private static final int NUM_ROWS = 25;
 	private static final int NUM_COLS = 50;
+	private static String lugar;
 
 	// Buttons to save and load files.
-	private JButton saveButton, loadButton;
+	private JButton saveButton;
 
 	// Area where the user does the editing
-	private JTextArea text;
+	private static JTextArea text;
 
 	// Creates the GUI
-	public EditarArchivo() {
+	public EditarArchivo(String lugar) {
+		this.lugar = lugar;
 		JFrame frmEditarArchivo = new JFrame();
 		frmEditarArchivo.setTitle("Editar Archivo");
 		frmEditarArchivo.setIconImage(Toolkit.getDefaultToolkit().getImage(EditarArchivo.class.getResource("/icons/weka-icon.png")));
 		JPanel buttonPanel = new JPanel();
 		saveButton = new JButton("Guardar Archivo");
-		loadButton = new JButton("Cargar Archivo");
 		buttonPanel.add(saveButton);
-		buttonPanel.add(loadButton);
 
 		text = new JTextArea(NUM_ROWS, NUM_COLS);
 		text.setFont(new Font("System", Font.PLAIN, 24));
@@ -56,10 +59,11 @@ public class EditarArchivo implements ActionListener {
 		contentPane.add(buttonPanel, BorderLayout.NORTH);
 
 		saveButton.addActionListener(this);
-		loadButton.addActionListener(this);
 
 		frmEditarArchivo.pack();
 		frmEditarArchivo.setVisible(true);
+		loadFile(lugar);
+	
 	}
 
 	// Listener for button clicks that loads the
@@ -67,9 +71,12 @@ public class EditarArchivo implements ActionListener {
 	// editor.
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == saveButton) {
-			saveFile();
+			saveFile(lugar);
+			MainWindow m = new MainWindow();
+			m.actualizarInformacion(lugar);
+			
 		} else {
-			loadFile();
+			loadFile(lugar);
 		}
 	}
 
@@ -77,48 +84,36 @@ public class EditarArchivo implements ActionListener {
 	// to save to. Then write the contents of the text area
 	// to that file. Does nothing if the user cancels out
 	// of the file chooser.
-	private void saveFile() {
+	private void saveFile(String lugar) {
 		File file;
 
 		// create and display dialog box to get file name
-		JFileChooser dialog = new JFileChooser();
-
-		// Make sure the user didn't cancel the file chooser
-		if (dialog.showSaveDialog(text) == JFileChooser.APPROVE_OPTION) {
-
-			// Get the file the user selected
-			file = dialog.getSelectedFile();
-
+		
 			try {
 				// Now write to the file
-				PrintWriter output = new PrintWriter(new FileWriter(file));
+				PrintWriter output = new PrintWriter(new FileWriter(lugar));
 				output.println(text.getText());
 				output.close();
+				JOptionPane.showMessageDialog(null, "Archivo guardado correctamente");
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(text, "Can't save file "
+				JOptionPane.showMessageDialog(text, "No se puede salvar el archivo"
 						+ e.getMessage());
 			}
-		}
+		
 	}
 
 	// Display a file chooser so the user can select a file to load.
 	// Then load the file into the editing area. Does nothing if
 	// the user cancels the file chooser.
-	private void loadFile() {
+	private static void loadFile(String lugar) {
 		String line;
 		File file;
 
-		// create and display dialog box to get file name
-		JFileChooser dialog = new JFileChooser();
-
-		// Make sure the user did not cancel.
-		if (dialog.showOpenDialog(text) == JFileChooser.APPROVE_OPTION) {
-			// Find out which file the user selected.
-			file = dialog.getSelectedFile();
+		
 
 			try {
 				// Open the file.
-				BufferedReader input = new BufferedReader(new FileReader(file));
+				BufferedReader input = new BufferedReader(new FileReader(lugar));
 
 				// Clear the editing area
 				text.setText("");
@@ -137,11 +132,10 @@ public class EditarArchivo implements ActionListener {
 				JOptionPane.showMessageDialog(text, "Can't load file "
 						+ e.getMessage());
 			}
-		}
+		
 	}
+	
+	
 
-	// Main program for the application
-	public static void main(String[] args) {
-		new EditarArchivo();
-	}
+	
 }
