@@ -50,8 +50,8 @@ public class MainWindow extends JFrame {
 	private JPanel mainPanel;
 	private File defaultlocation = new File(".");
 	private JButton btnEditarDataset = new JButton("Editar Dataset");
-	private JTextField ruta;
-	private JTextPane resumen;
+	private static JTextField ruta;
+	private static JTextPane resumen;
 	private JPanel informacionArchivoPanel;
 	private JPanel resultadosPanel;
 	private Instances data;
@@ -110,6 +110,7 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				EditarArchivo ea = new EditarArchivo(ruta.getText());
+				actualizarInformacion(ruta.getText());
 
 
 			}
@@ -240,7 +241,7 @@ public class MainWindow extends JFrame {
 		}
 	}
 
-	public void actualizarInformacion(String lugar)
+	public static void actualizarInformacion(String lugar)
 	{
 
 		try {
