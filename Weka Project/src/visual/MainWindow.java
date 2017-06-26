@@ -110,7 +110,7 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				EditarArchivo ea = new EditarArchivo(ruta.getText());
-				actualizarInformacion(ruta.getText());
+				
 
 
 			}

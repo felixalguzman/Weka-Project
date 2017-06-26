@@ -36,22 +36,5 @@ public class Prueba {
 		return dataset.toSummaryString();
 	}
 	
-	public int CantidadInstancias(){
-		return dataset.numInstances();
-	}
 	
-	public int CantidadAtributos(){
-		return dataset.numAttributes();
-	}
-	
-	public String[] Atributos()
-	{
-		String[] nombres = new String[dataset.numAttributes()];
-		
-		for(int i=0; i < dataset.numAttributes();i++)
-		{
-			nombres[i] = dataset.attribute(i).toString();
-		}
-		return nombres;
-	}
 }
