@@ -1,6 +1,3 @@
-# README #
-
-
 # Weka #
 
 Una aplicación en un ambiente de su preferencia (ej. Java) de manera que se le suministre nueva información y la aplicación realice una tarea de minería.
